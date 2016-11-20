@@ -1,9 +1,14 @@
 doctype html
 html(lang="en")
 	head
+		//Подключение тестировщиков
+		if showTests
+			link(rel="stylesheet" href="/vendor/mocha.css")
+
 		meta(charset="UTF-8")
 		block title
 			title My site
+		script(src="//code.jquery.com/jquery-2.0.2.min.js")
 	body
 		header
 			img(src='/img/logo.jpg')
@@ -11,3 +16,16 @@ html(lang="en")
 		h2 #{fortune}
 		block content
 			h1 Any content
+
+		//Подключение тестировщиков
+		if showTests
+			#mocha
+			script(src="/vendor/mocha.js")
+			script(src="/vendor/chai.js")
+			script.
+				mocha.ui('tdd');
+				var assert = chai.assert;
+			script(src="/qa/tests-global.js")
+		if pageTestScript
+			script(src=pageTestScript)
+		script mocha.run();

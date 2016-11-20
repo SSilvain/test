@@ -10,16 +10,18 @@ app.get('/', function(req, res) {
 	res.render("home");
 });
 
-var fortunes = [
-	"Победи свои страхи, или они победят тебя.",
-	"Рекам нужны истоки.",
-	"Не бойся неведомого.",
-	"Тебя ждет приятный сюрприз.",
-	"Будь проще везде, где только можно.",
-];
+// Здесь находятся маршруты...
+app.use(function(req, res, next) {
+	res.locals.showTests = app.get('env') !== 'production' &&
+		req.query.test === '1';
+	next();
+});
 
 app.get('/about', function(req, res) {
-	res.render('about', { fortune: fortune.getFortune() });
+	res.render('about', {
+		fortune: fortune.getFortune(),
+		pageTestScript: '/qa/tests-about.js'
+	});
 });
 
 // пользовательская страница 404
