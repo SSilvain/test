@@ -4,6 +4,7 @@ var app = express();
 app.set('view engine', 'pug');
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/views/public'));
+var fortune = require('./lib/fortune.js');
 
 app.get('/', function(req, res) {
 	res.render("home");
@@ -18,9 +19,7 @@ var fortunes = [
 ];
 
 app.get('/about', function(req, res) {
-	var randomFortune =
-		fortunes[Math.floor(Math.random() * fortunes.length)];
-	res.render('about', { fortune: randomFortune });
+	res.render('about', { fortune: fortune.getFortune() });
 });
 
 // пользовательская страница 404
