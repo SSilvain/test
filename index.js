@@ -9,10 +9,6 @@ app.get('/', function(req, res) {
 	res.render("home");
 });
 
-// app.get('/about', function(req, res) {
-// 	res.render("about");
-// });
-
 var fortunes = [
 	"Победи свои страхи, или они победят тебя.",
 	"Рекам нужны истоки.",
